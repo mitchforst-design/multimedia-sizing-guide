@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multimedia Production â Project Sizing Guide</title>
+<link href="https://fonts.cdnfonts.com/css/azo-sans" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    /* CFA corporate blues */
+    --navy:       #060058;
+    --navy-mid:   #0D2B8A;
+    --blue:       #008ED6;
+    --blue-light: #40B4E5;
+    --blue-pale:  #D6EEF8;
+    --blue-wash:  #EEF7FC;
+
+    /* Neutrals */
+    --bg:         #F4F6F9;
+    --surface:    #FFFFFF;
+    --surface-2:  #EEF2F7;
+    --ink:        #0A0A1A;
+    --ink-2:      #3A4460;
+    --ink-3:      #7A86A8;
+    --rule:       #D8DFE8;
+
+    /* Size accent colors â all in the blue family with one warm contrast */
+    --xs-bg: #EEF2F7;  --xs-ink: #3A4460;  --xs-dot: #7A86A8;
+    --s-bg:  #D6EEF8;  --s-ink:  #004A7A;  --s-dot:  #008ED6;
+    --m-bg:  #C0E2F5;  --m-ink:  #003560;  --m-dot:  #0073B8;
+    --l-bg:  #0D2B8A;  --l-ink:  #FFFFFF;  --l-dot:  #40B4E5;
+    --xl-bg: #060058;  --xl-ink: #FFFFFF;  --xl-dot: #40B4E5;
+    --xxl-bg:#003A6E;  --xxl-ink:#FFFFFF;  --xxl-dot:#7DD4F5;
+    --live-bg:#EEF7FC; --live-ink:#003560; --live-dot:#008ED6;
+  }
+
+  html { font-size: 16px; }
+  body {
+    font-family: 'Azo Sans', 'Helvetica Neue', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ââ HEADER ââ */
+  .site-header {
+    background: var(--navy);
+    color: #fff;
+    padding: 3rem 4rem 2.75rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .site-header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    border: 50px solid rgba(0,142,214,0.12);
+  }
+  .site-header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 40%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    border: 30px solid rgba(0,142,214,0.08);
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 0.75rem;
+  }
+  .header-title {
+    font-family: 'Azo Sans', 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+    font-weight: 700;
+    line-height: 1.15;
+    color: #fff;
+    max-width: 560px;
+    letter-spacing: -0.01em;
+  }
+  .header-title span {
+    color: var(--blue-light);
+    font-weight: 300;
+  }
+  .header-divider {
+    width: 40px;
+    height: 3px;
+    background: var(--blue);
+    margin: 1.25rem 0;
+    border-radius: 2px;
+  }
+  .header-meta {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  .header-meta-item { font-size: 13px; color: rgba(255,255,255,0.55); }
+  .header-meta-item strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+  /* ââ LAYOUT ââ */
+  .page-body { max-width: 1200px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+
+  /* ââ INTRO ââ */
+  .intro-block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  @media (max-width: 640px) { .intro-block { grid-template-columns: 1fr; } }
+  .intro-block p { font-size: 14px; color: var(--ink-2); line-height: 1.75; }
+  .intro-block .tip {
+    background: var(--blue-wash);
+    border-left: 3px solid var(--blue);
+    padding: 1rem 1.25rem;
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    color: var(--live-ink);
+    line-height: 1.65;
+  }
+  .intro-block .tip strong {
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.3rem;
+    color: var(--navy-mid);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ââ SECTION LABEL ââ */
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* ââ SPECTRUM ââ */
+  .spectrum-block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+  }
+  .spectrum-bar {
+    display: flex;
+    height: 8px;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 0.75rem 0 0.6rem;
+    gap: 2px;
+  }
+  .spectrum-seg { border-radius: 2px; }
+  .spectrum-seg.xs  { flex: 1;   background: var(--xs-dot); }
+  .spectrum-seg.s   { flex: 1.5; background: var(--s-dot); }
+  .spectrum-seg.m   { flex: 2;   background: var(--m-dot); }
+  .spectrum-seg.l   { flex: 2.5; background: #0D2B8A; }
+  .spectrum-seg.xl  { flex: 3;   background: #060058; }
+  .spectrum-seg.xxl { flex: 4;   background: #003A6E; }
+  .spectrum-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--ink-3);
+  }
+  .spectrum-labels span { font-weight: 500; }
+
+  /* ââ SIZE CARDS ââ */
+  .sizes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .size-card {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+  .size-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 36px rgba(6,0,88,0.1);
+  }
+
+  .card-top {
+    padding: 1.25rem 1.5rem 1.1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  .size-pill {
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    min-width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+  .card-top-text { flex: 1; min-width: 0; }
+  .card-effort {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 2px;
+  }
+  .card-effort-note { font-size: 11px; color: var(--ink-3); font-weight: 400; margin-left: 4px; }
+  .card-desc { font-size: 12px; color: var(--ink-2); line-height: 1.6; margin-top: 3px; }
+  .review-pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 1px;
+  }
+
+  .card-body { padding: 1.1rem 1.5rem 1.25rem; }
+  .card-col-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-3);
+    margin: 0.75rem 0 0.4rem;
+  }
+  .card-col-label:first-child { margin-top: 0; }
+  .item-list { list-style: none; padding: 0; margin: 0; }
+  .item-list li {
+    font-size: 12.5px;
+    color: var(--ink-2);
+    padding: 2px 0 2px 15px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .item-list.dots li::before {
+    content: 'Â·';
+    position: absolute; left: 4px;
+    color: var(--ink-3);
+    font-size: 14px; line-height: 1.2;
+  }
+  .item-list.arrows li::before {
+    content: 'âº';
+    position: absolute; left: 2px;
+    color: var(--blue);
+    font-size: 13px; line-height: 1.3;
+    font-weight: 700;
+  }
+
+  /* size-specific colors */
+  .xs .size-pill  { background: var(--xs-bg); color: var(--xs-ink); }
+  .xs .review-pill { background: var(--xs-bg); color: var(--xs-dot); border: 1px solid var(--rule); }
+  .s  .size-pill  { background: var(--s-bg);  color: var(--s-ink); }
+  .s  .review-pill { background: var(--s-bg);  color: var(--s-dot); border: 1px solid #A8D8F0; }
+  .m  .size-pill  { background: var(--m-bg);  color: var(--m-ink); }
+  .m  .review-pill { background: var(--m-bg);  color: var(--m-dot); border: 1px solid #80C8EE; }
+  .l  .size-pill  { background: var(--l-bg);  color: var(--l-ink); }
+  .l  .review-pill { background: var(--l-bg);  color: var(--l-dot); border: 1px solid #1A3D9A; }
+  .xl .size-pill  { background: var(--xl-bg); color: var(--xl-ink); }
+  .xl .review-pill { background: var(--xl-bg); color: var(--xl-dot); border: 1px solid #1A1070; }
+  .xxl .size-pill { background: var(--xxl-bg); color: var(--xxl-ink); }
+  .xxl .review-pill { background: var(--xxl-bg); color: var(--xxl-dot); border: 1px solid #004A8A; }
+
+  /* ââ LIVE EVENT ââ */
+  .live-block {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  .live-hd {
+    background: var(--navy);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .live-hd-text { flex: 1; }
+  .live-hd-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue-light);
+    margin-bottom: 3px;
+  }
+  .live-hd-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .live-chip {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--blue);
+    color: #fff;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .live-body { padding: 1.5rem 2rem; }
+  .live-intro { font-size: 13px; color: var(--ink-2); line-height: 1.75; margin-bottom: 1.5rem; }
+  .live-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem;
+  }
+  .live-card {
+    background: var(--blue-wash);
+    border: 1px solid #C4DFF0;
+    border-radius: 8px;
+    padding: 1rem 1.1rem;
+  }
+  .live-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+  }
+  .live-card-val { font-size: 12.5px; color: var(--ink-2); line-height: 1.65; }
+  .live-card-val ul { list-style: none; padding: 0; }
+  .live-card-val ul li { padding: 2px 0 2px 13px; position: relative; }
+  .live-card-val ul li::before {
+    content: 'Â·';
+    position: absolute; left: 3px;
+    color: var(--blue); font-size: 14px; line-height: 1.2;
+  }
+
+  /* ââ FOOTNOTE ââ */
+  .footnote {
+    font-size: 12px;
+    color: var(--ink-3);
+    padding: 1rem 1.5rem;
+    border-left: 3px solid var(--blue-pale);
+    line-height: 1.75;
+    background: var(--surface);
+    border-radius: 0 8px 8px 0;
+  }
+
+  /* ââ ANIMATIONS ââ */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .size-card { animation: fadeUp 0.35s ease both; }
+  .size-card:nth-child(1) { animation-delay: 0.04s; }
+  .size-card:nth-child(2) { animation-delay: 0.08s; }
+  .size-card:nth-child(3) { animation-delay: 0.12s; }
+  .size-card:nth-child(4) { animation-delay: 0.16s; }
+  .size-card:nth-child(5) { animation-delay: 0.20s; }
+  .size-card:nth-child(6) { animation-delay: 0.24s; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <p class="header-eyebrow">MCX Â· Multimedia Production</p>
+  <h1 class="header-title">Project Sizing <span>Guide</span></h1>
+  <div class="header-divider"></div>
+  <div class="header-meta">
+    <span class="header-meta-item"><strong>Purpose:</strong> Communicating level of effort to stakeholders</span>
+    <span class="header-meta-item"><strong>Scope:</strong> Video, motion graphics &amp; podcast</span>
+    <span class="header-meta-item"><strong>Effort basis:</strong> Total team effort across all contributors</span>
+  </div>
+</header>
+
+<div class="page-body">
+
+  <div class="intro-block">
+    <p>Use this guide to set expectations on level of effort before work begins. Sizes reflect total team effort across all contributors â not a single person's time. Review rounds are noted separately because they are often the primary driver of scope growth.</p>
+    <div class="tip">
+      <strong>How to use this guide</strong>
+      When submitting a request, include a preferred size range. If your project lands between sizes, default up. Projects that grow mid-production will be re-sized and communicated to the requester.
+    </div>
+  </div>
+
+  <div class="spectrum-block">
+    <p class="section-label" style="margin-bottom:0.5rem;">Effort spectrum</p>
+    <div class="spectrum-bar">
+      <div class="spectrum-seg xs"></div>
+      <div class="spectrum-seg s"></div>
+      <div class="spectrum-seg m"></div>
+      <div class="spectrum-seg l"></div>
+      <div class="spectrum-seg xl"></div>
+      <div class="spectrum-seg xxl"></div>
+    </div>
+    <div class="spectrum-labels">
+      <span>XS Â· 0.5â2 hrs</span>
+      <span>S Â· 2â8 hrs</span>
+      <span>M Â· 1â3 days</span>
+      <span>L Â· 3â7 days</span>
+      <span>XL Â· 1â3 wks</span>
+      <span>XXL Â· 3+ wks</span>
+    </div>
+  </div>
+
+  <p class="section-label">T-shirt sizes</p>
+  <div class="sizes-grid">
+
+    <div class="size-card xs">
+      <div class="card-top">
+        <div class="size-pill">XS</div>
+        <div class="card-top-text">
+          <div class="card-effort">0.5â2 hours <span class="card-effort-note">per video</span></div>
+          <div class="card-desc">Simple edits to existing assets. No scripting or original creative.</div>
+        </div>
+        <span class="review-pill">1 round</span>
+      </div>
+      <div class="card-body">
+        <p class="card-col-label">Typical deliverables</p>
+        <ul class="item-list dots">
+          <li>Crops, captions, trims</li>
+          <li>Format conversions</li>
+          <li>Thumbnail updates, GIFs</li>
+        </ul>
+        <p class="card-col-label">Examples</p>
+        <ul class="item-list arrows">
+          <li>Add subtitles to a webinar clip</li>
+          <li>Resize video for LinkedIn</li>
+          <li>Trim an interview clip</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="size-card s">
+      <div class="card-top">
+        <div class="size-pill">S</div>
+        <div class="card-top-text">
+          <div class="card-effort">2â8 hours</div>
+          <div class="card-desc">Basic content creation from existing footage or templates. Limited motion graphics. Single podcast episodes.</div>
+        </div>
+        <span class="review-pill">1â2 rounds</span>
+      </div>
+      <div class="card-body">
+        <p class="card-col-label">Typical deliverables</p>
+        <ul class="item-list dots">
+          <li>Short social videos</li>
+          <li>Simple animations, quote cards with motion</li>
+          <li>Audiograms, podcast episodes</li>
+        </ul>
+        <p class="card-col-label">Examples</p>
+        <ul class="item-list arrows">
+          <li>30-second event highlight reel</li>
+          <li>Animated statistic graphic</li>
+          <li>Social media teaser clip</li>
+          <li>Single podcast episode edit and publish</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="size-card m">
+      <div class="card-top">
+        <div class="size-pill">M</div>
+        <div class="card-top-text">
+          <div class="card-effort">1â3 days</div>
+          <div class="card-desc">Planned production with editing, graphic design, and multiple assets. Moderate creative development.</div>
+        </div>
+        <span class="review-pill">2â3 rounds</span>
+      </div>
+      <div class="card-body">
+        <p class="card-col-label">Typical deliverables</p>
+        <ul class="item-list dots">
+          <li>Polished branded videos with motion graphics</li>
+          <li>Multiple edit versions</li>
+          <li>Captioning</li>
+        </ul>
+        <p class="card-col-label">Examples</p>
+        <ul class="item-list arrows">
+          <li>Membership benefit video</li>
+          <li>Conference promo</li>
+          <li>Executive message with graphics</li>
+          <li>Fabozzi interview episode</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="size-card l">
+      <div class="card-top">
+        <div class="size-pill">L</div>
+        <div class="card-top-text">
+          <div class="card-effort" style="color:#fff;">3â7 days</div>
+          <div class="card-desc" style="color:rgba(255,255,255,0.75);">Scripted, multi-stakeholder project with custom animation or on-site filming.</div>
+        </div>
+        <span class="review-pill">3â4 rounds</span>
+      </div>
+      <div class="card-body">
+        <p class="card-col-label">Typical deliverables</p>
+        <ul class="item-list dots">
+          <li>Full campaign videos, multi-scene edits</li>
+          <li>Advanced motion graphics</li>
+          <li>DAM asset packaging</li>
+        </ul>
+        <p class="card-col-label">Examples</p>
+        <ul class="item-list arrows">
+          <li>Brand story video</li>
+          <li>Thought leadership series episode</li>
+          <li>Event recap film</li>
+          <li>Recruitment video</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="size-card xl">
+      <div class="card-top">
+        <div class="size-pill">XL</div>
+        <div class="card-top-text">
+          <div class="card-effort" style="color:#fff;">1â3 weeks</div>
+          <div class="card-desc" style="color:rgba(255,255,255,0.75);">Multi-phase project with substantial production requirements and extended stakeholder involvement.</div>
+        </div>
+        <span class="review-pill">4â5 rounds</span>
+      </div>
+      <div class="card-body">
+        <p class="card-col-label">Typical deliverables</p>
+        <ul class="item-list dots">
+          <li>Campaign hero videos</li>
+          <li>Large-scale animations, multi-video series</li>
+          <li>Coordinated asset suites</li>
+        </ul>
+        <p class="card-col-label">Examples</p>
+        <ul class="item-list arrows">
+          <li>Membership campaign launch video</li>
+          <li>Animated explainer series</li>
+          <li>Employer recognition campaign</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="size-card xxl">
+      <div class="card-top">
+        <div class="size-pill">XXL</div>
+        <div class="card-top-text">
+          <div class="card-effort" style="color:#fff;">3+ weeks</div>
+          <div class="card-desc" style="color:rgba(255,255,255,0.75);">Enterprise initiative requiring strategic planning, external vendors, and complex multi-stakeholder approvals.</div>
+        </div>
+        <span class="review-pill">5+ rounds</span>
+      </div>
+      <div class="card-body">
+        <p class="card-col-label">Typical deliverables</p>
+        <ul class="item-list dots">
+          <li>Integrated campaigns, documentary-style productions</li>
+          <li>Multi-language rollouts</li>
+          <li>Annual content packages</li>
+        </ul>
+        <p class="card-col-label">Examples</p>
+        <ul class="item-list arrows">
+          <li>Global brand campaign</li>
+          <li>Annual report video suite</li>
+          <li>Conference keynote package</li>
+          <li>Multi-language video rollout</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="section-label">Special category</p>
+  <div class="live-block">
+    <div class="live-hd">
+      <div class="live-hd-text">
+        <div class="live-hd-eyebrow">Outside t-shirt scale</div>
+        <div class="live-hd-title">Live Event Production</div>
+      </div>
+      <span class="live-chip">Scoped individually</span>
+    </div>
+    <div class="live-body">
+      <p class="live-intro">Live streaming and large-scale event packages are scoped individually. Effort is driven by event duration, crew size, and broadcast complexity â not post-production hours alone. All live events require dedicated pre-production planning time.</p>
+      <div class="live-grid">
+        <div class="live-card">
+          <div class="live-card-label">Effort model</div>
+          <div class="live-card-val">Per event; includes pre-production, rehearsal, live execution, and post-processing</div>
+        </div>
+        <div class="live-card">
+          <div class="live-card-label">On-site production</div>
+          <div class="live-card-val"><ul>
+            <li>Testimonial and society interviews</li>
+            <li>B-roll and candid filming</li>
+            <li>Stage and speaker coverage</li>
+          </ul></div>
+        </div>
+        <div class="live-card">
+          <div class="live-card-label">Creative &amp; design</div>
+          <div class="live-card-val"><ul>
+            <li>Motion graphics and lower thirds</li>
+            <li>Stage design and screen layouts</li>
+            <li>Branded broadcast packages</li>
+          </ul></div>
+        </div>
+        <div class="live-card">
+          <div class="live-card-label">Key variables</div>
+          <div class="live-card-val"><ul>
+            <li>Number of streams and sessions</li>
+            <li>Rehearsal time and run-of-show</li>
+            <li>Captioning and archive delivery</li>
+          </ul></div>
+        </div>
+        <div class="live-card">
+          <div class="live-card-label">Examples</div>
+          <div class="live-card-val"><ul>
+            <li>CFA Live</li>
+            <li>Annual conference</li>
+            <li>Hybrid and multi-city events</li>
+          </ul></div>
+        </div>
+        <div class="live-card">
+          <div class="live-card-label">Lead time</div>
+          <div class="live-card-val">Minimum 6â8 weeks for full event production planning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footnote">
+    Sizes reflect total team effort across all contributors. Review round counts are estimates â actual rounds depend on stakeholder availability and feedback scope. Projects that grow mid-production will be re-sized and communicated to the requester.
+  </div>
+
+</div>
+</body>
+</html>
